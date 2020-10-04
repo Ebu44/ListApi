@@ -24,6 +24,7 @@ const getListCart = (req, res, next) => {
 };
 
 const getListItem = (req, res, next) => {
+  //Find one
   ListCart.findById(req.params.item_id, (err, data) => {
     if (err) {
       console.log(err);
@@ -36,22 +37,18 @@ const getListItem = (req, res, next) => {
 
 const editListCart = (req, res, next) => {
   //Update
-  ListCart.findByIdAndUpdate(
-    req.params.item_id,
-    (err, data) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("Güncellendi");
-      }
-    },
-    { name, amount, price }
-  );
+  ListCart.findByIdAndUpdate(req.params.item_id, req.body, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("güncellendi");
+    }
+  });
 };
 
 const deleteListItem = (req, res, next) => {
   //Delete
-  ListCart.findByIdAndRemove(req.params.item_id, (err, data) => {
+  ListCart.findByIdAndRemove(req.params.item_id, (err) => {
     if (err) {
       console.log(err);
     } else {
