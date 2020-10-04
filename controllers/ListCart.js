@@ -10,7 +10,6 @@ const addListItem = (req, res, next) => {
     amount,
     price,
   });
-  res.send("Welcome");
 };
 
 const getListCart = (req, res, next) => {
@@ -24,12 +23,47 @@ const getListCart = (req, res, next) => {
   res.send("Getting");
 };
 
+const getListItem = (req, res, next) => {
+  ListCart.findById(req.params.item_id, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(data);
+    }
+  });
+  res.send("Getting one");
+};
+
 const editListCart = (req, res, next) => {
   //Update
+  ListCart.findByIdAndUpdate(
+    req.params.item_id,
+    (err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Güncellendi");
+      }
+    },
+    { name, amount, price }
+  );
 };
 
-const deleteListItem = () => {
+const deleteListItem = (req, res, next) => {
   //Delete
+  ListCart.findByIdAndRemove(req.params.item_id, (err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Silindi");
+    }
+  });
 };
 
-module.exports = { getListCart, addListItem, editListCart, deleteListItem };
+module.exports = {
+  getListCart,
+  getListItem,
+  addListItem,
+  editListCart,
+  deleteListItem,
+};

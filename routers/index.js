@@ -1,6 +1,7 @@
 const express = require("express");
 const {
   getListCart,
+  getListItem,
   addListItem,
   editListCart,
   deleteListItem,
@@ -12,12 +13,14 @@ router.get("/", (req, res) => {
   res.send("Anasayfaya Hoşgeldin");
 });
 
-router.get("/getListCart", getListCart);
+router.get("/ListCart", getListCart);
 
-router.post("/addListCard", addListItem);
+router.get("/ListCart/:item_id", getListItem);
 
-router.put("/editListCart", editListCart);
+router.post("/ListCart", addListItem);
 
-router.delete("/deleteListItem", deleteListItem);
+router.put("/ListCart/:item_id", editListCart);
+
+router.delete("/ListCart/:item_id", deleteListItem);
 
 module.exports = router;
